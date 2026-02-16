@@ -1,0 +1,10 @@
+config("default") {
+  cflags = []
+  cflags_cc = [ "-std=c++20" ]
+
+  if (is_debug) {
+    cflags += [ "-g" ]
+  } else {
+    cflags += [ "-O2" ]
+  }
+}

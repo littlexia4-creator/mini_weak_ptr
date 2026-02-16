@@ -1,0 +1,41 @@
+toolchain("default") {
+  tool("cc") {
+    depfile = "{{output}}.d"
+    depsformat = "gcc"
+    command = "$cc -MMD -MF $depfile -c {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} {{source}} -o {{output}}"
+    description = "CC {{output}}"
+    outputs = [ "{{source_out_dir}}/{{source_name_part}}.o" ]
+  }
+
+  tool("cxx") {
+    depfile = "{{output}}.d"
+    depsformat = "gcc"
+    command = "$cxx -MMD -MF $depfile -c {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} {{source}} -o {{output}}"
+    description = "CXX {{output}}"
+    outputs = [ "{{source_out_dir}}/{{source_name_part}}.o" ]
+  }
+
+  tool("alink") {
+    command = "$ar rcs {{output}} {{inputs}}"
+    description = "AR {{output}}"
+    outputs = [ "{{target_out_dir}}/{{target_output_name}}.a" ]
+  }
+
+  tool("link") {
+    default_output_dir = "."
+    default_output_extension = ""
+    lib_switch = "-l"
+    lib_dir_switch = "-L"
+    command = "$ld {{ldflags}} {{inputs}} {{solibs}} {{libs}} -o {{output}}"
+    description = "LINK {{output}}"
+    outputs = [ "{{output_dir}}/{{target_output_name}}{{output_extension}}" ]
+  }
+
+  tool("stamp") {
+    command = "touch {{output}}"
+  }
+
+  tool("copy") {
+    command = "cp -af {{source}} {{output}}"
+  }
+}

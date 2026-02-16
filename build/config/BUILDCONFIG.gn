@@ -1,0 +1,29 @@
+set_default_toolchain("//build/toolchain:default")
+
+default_configs = [ "//build/config:default" ]
+
+# Global build arguments
+# These can be overridden via args.gn at generation time.
+declare_args() {
+  is_debug = true
+  cc = "cc"
+  cxx = "c++"
+  ar = "ar"
+  ld = "c++"
+}
+
+set_defaults("executable") {
+  configs = default_configs
+}
+
+set_defaults("source_set") {
+  configs = default_configs
+}
+
+set_defaults("static_library") {
+  configs = default_configs
+}
+
+set_defaults("shared_library") {
+  configs = default_configs
+}

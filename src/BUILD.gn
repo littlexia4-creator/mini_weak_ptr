@@ -1,0 +1,25 @@
+source_set("mini_weak_ptr_core") {
+  sources = [
+    "bad_weak_ptr.cxx",
+  ]
+  include_dirs = [ "." ]
+}
+
+source_set("mini_weak_ptr_samples") {
+  sources = [
+    "test.cxx",
+  ]
+  include_dirs = [ "." ]
+  deps = [ ":mini_weak_ptr_core" ]
+}
+
+executable("mini_weak_ptr_demo") {
+  sources = [
+    "main.cxx",
+  ]
+  include_dirs = [ "." ]
+  deps = [
+    ":mini_weak_ptr_core",
+    ":mini_weak_ptr_samples",
+  ]
+}
